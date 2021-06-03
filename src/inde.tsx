@@ -11,9 +11,8 @@ import {
   Archivo_500Medium,
   Archivo_600SemiBold,
 } from '@expo-google-fonts/archivo';
-
-import { Scheduling } from './src/screens/Scheduling';
-import theme from './src/styles/theme';
+import theme from './styles/theme';
+import { Scheduling } from './screens/Scheduling';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
