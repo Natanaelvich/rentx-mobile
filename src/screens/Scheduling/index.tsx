@@ -37,12 +37,7 @@ export function Scheduling() {
         backgroundColor="transparent"
       />
       <Header>
-        <BackButton
-          onPress={() => {
-            console.log('back');
-          }}
-          color={theme.colors.shape}
-        />
+        <BackButton onPress={nativation.goBack} color={theme.colors.shape} />
         <Title>
           Escolha uma {`\n`}
           data de inicio e {`\n`}

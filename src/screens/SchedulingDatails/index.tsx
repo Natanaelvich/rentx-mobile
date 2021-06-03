@@ -53,11 +53,7 @@ export function SchedulingDatails() {
   return (
     <Container>
       <Header>
-        <BackButton
-          onPress={() => {
-            console.log('back');
-          }}
-        />
+        <BackButton onPress={nativation.goBack} />
       </Header>
       <CarImages>
         <ImageSlider
