@@ -33,7 +33,11 @@ export function CarDatails() {
   return (
     <Container>
       <Header>
-        <BackButton onPress={() => {}} />
+        <BackButton
+          onPress={() => {
+            console.log('back');
+          }}
+        />
       </Header>
       <CarImages>
         <ImageSlider
