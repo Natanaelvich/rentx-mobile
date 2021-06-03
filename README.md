@@ -1,7 +1,6 @@
-
 <p align='center'>
-  <img src='' width='140' />
-  <h1 align='center'> RENTX </h1>
+  <img src='https://user-images.githubusercontent.com/52014318/120644133-5efb8580-c44d-11eb-87b1-f908f7932c77.png' width='140' />
+  <h1 align='center'> Rent cars simply 🚗 </h1>
 </p>
 
 
@@ -20,7 +19,7 @@
 ## ScreenShots
 
 <p align='center'>
-<img src='' width='240' />
+<img src='https://user-images.githubusercontent.com/52014318/120644090-5440f080-c44d-11eb-8304-f050f61b33d6.png' width='240' />
 </p>
 
 ## Languages & tools
