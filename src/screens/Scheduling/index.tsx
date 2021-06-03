@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { useNavigation } from '@react-navigation/native';
+
 import { useTheme } from 'styled-components';
 
 import { StatusBar } from 'react-native';
@@ -21,6 +24,11 @@ import { Button } from '../../components/Button';
 
 export function Scheduling() {
   const theme = useTheme();
+  const nativation = useNavigation();
+
+  function handleConfirmRental() {
+    nativation.navigate('SchedulingDatails');
+  }
   return (
     <Container>
       <StatusBar
@@ -58,7 +66,7 @@ export function Scheduling() {
         <Calendar />
       </Content>
       <Footer>
-        <Button title="Confirmar" />
+        <Button title="Confirmar" onPress={handleConfirmRental} />
       </Footer>
     </Container>
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { useNavigation } from '@react-navigation/native';
 import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
 import { Accessory } from '../../components/Accessory';
@@ -30,6 +31,11 @@ import {
 } from './styles';
 
 export function CarDatails() {
+  const nativation = useNavigation();
+
+  function handleSelectPeriod() {
+    nativation.navigate('Scheduling');
+  }
   return (
     <Container>
       <Header>
@@ -72,7 +78,10 @@ export function CarDatails() {
         </About>
       </Content>
       <Footer>
-        <Button title="Confirmar" />
+        <Button
+          title="Escolher período do alugel"
+          onPress={handleSelectPeriod}
+        />
       </Footer>
     </Container>
   );
