@@ -45,15 +45,18 @@ import {
 
 export function SchedulingDatails() {
   const theme = useTheme();
-  const nativation = useNavigation();
+  const navigation = useNavigation();
 
   function handleRentalComplete() {
-    nativation.navigate('SchedulingComplete');
+    navigation.navigate('SchedulingComplete');
+  }
+  function handleBack() {
+    navigation.goBack();
   }
   return (
     <Container>
       <Header>
-        <BackButton onPress={nativation.goBack} />
+        <BackButton onPress={handleBack} />
       </Header>
       <CarImages>
         <ImageSlider
