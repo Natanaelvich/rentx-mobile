@@ -14,7 +14,6 @@ import { Button } from '../../components/Button';
 
 import { getAcessoryIcons } from '../../utils/getAcessoryIcons';
 import { CarDTO } from '../../dtos/CarDTO';
-import { getPlatformDate } from '../../utils/getPlataformDate';
 
 import {
   Container,
@@ -42,6 +41,7 @@ import {
   RentalPriceTotal,
 } from './styles';
 import api from '../../services/api';
+import { getPlatformDate } from '../../utils/getPlatformDate';
 
 interface Params {
   car: CarDTO;
