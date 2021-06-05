@@ -40,6 +40,7 @@ export function ImageSlider({ imagesUrl }: Props) {
           </CardImageWrapper>
         )}
         horizontal
+        pagingEnabled
         showsHorizontalScrollIndicator={false}
         onViewableItemsChanged={indexChange.current}
       />
