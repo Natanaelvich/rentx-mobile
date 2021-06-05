@@ -19,7 +19,15 @@
 ## ScreenShots
 
 <p align='center'>
-<img src='https://user-images.githubusercontent.com/52014318/120644090-5440f080-c44d-11eb-8304-f050f61b33d6.png' width='240' />
+<img src='https://user-images.githubusercontent.com/52014318/120896037-13381000-c5f6-11eb-9354-9a3a365f1a94.png' width='240' />
+<img src='https://user-images.githubusercontent.com/52014318/120896040-1501d380-c5f6-11eb-856f-373cbafa4bdc.png' width='240' />
+<img src='https://user-images.githubusercontent.com/52014318/120896042-159a6a00-c5f6-11eb-811c-12e85d804570.png' width='240' />
+</p>
+
+<p align='center'>
+<img src='https://user-images.githubusercontent.com/52014318/120896044-16330080-c5f6-11eb-9ce0-e6e617f075af.png' width='240' />
+<img src='https://user-images.githubusercontent.com/52014318/120896046-16cb9700-c5f6-11eb-9d1d-991acbba3b58.png' width='240' />
+<img src='https://user-images.githubusercontent.com/52014318/120896047-17642d80-c5f6-11eb-8840-28031d8bdc3e.png' width='240' />
 </p>
 
 ## Languages & tools
