@@ -2,6 +2,7 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
 import { FlatList } from 'react-native';
+import { RectButton } from 'react-native-gesture-handler';
 import { CarDTO } from '../../dtos/CarDTO';
 
 export const Container = styled.View`
