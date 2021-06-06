@@ -3,7 +3,6 @@
   <h1 align='center'> Rent cars simply 🚗 </h1>
 </p>
 
-
 ### Rentx ⚡
 
 ## Install
@@ -34,6 +33,7 @@
 
 <p align='center'>
   <img src='https://user-images.githubusercontent.com/52014318/120924583-ceba7c00-c6aa-11eb-84d4-896fc2fe38d5.gif' width='240' />
+  <img src='https://user-images.githubusercontent.com/52014318/120929597-05e75800-c6c0-11eb-9ff3-7f2e6d57c026.gif' width='240' />
 </p>
 
 
