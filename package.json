@@ -1,13 +1,19 @@
 {
   "main": "index.js",
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "server:expo": "json-server  src/services/server.json --host 192.168.0.106 --port 3333 --delay 700",
+    "server": "json-server  src/services/server.json --port 3333 --delay 700",
     "web": "expo start --web",
+    "android": "react-native run-android",
+    "android:release": "cd android/ && ./gradlew clean && ./gradlew cleanBuildCache && ./gradlew assembleRelease",
+    "android:abb": "cd android/ && ./gradlew clean && ./gradlew cleanBuildCache && ./gradlew bundleRelease",
+    "android:staging": "cd android/ && ./gradlew clean && ./gradlew cleanBuildCache && ./gradlew assembleReleaseStaging",
+    "ios": "react-native run-ios",
+    "ios:staging": "react-native run-ios --configuration Staging",
     "start": "react-native start",
     "test": "jest",
-    "server:expo": "json-server  src/services/server.json --host 192.168.0.106 --port 3333 --delay 700",
-    "server": "json-server  src/services/server.json --port 3333 --delay 700"
+    "lint": "eslint .",
+    "pod": "cd ios && pod install"
   },
   "dependencies": {
     "@expo-google-fonts/archivo": "^0.1.0",
