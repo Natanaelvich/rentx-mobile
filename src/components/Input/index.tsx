@@ -7,10 +7,10 @@ import { Container, InputText, IconContainer } from './styles';
 
 interface Props extends TextInputProps {
   iconName: React.ComponentProps<typeof Feather>['name'];
-  fieldValid: boolean;
+  value: string;
 }
 
-export function Input({ iconName, fieldValid, ...rest }: Props) {
+export function Input({ iconName, value, ...rest }: Props) {
   const theme = useTheme();
 
   const [isFocused, setIsFocused] = useState(false);
@@ -20,7 +20,7 @@ export function Input({ iconName, fieldValid, ...rest }: Props) {
     setIsFocused(true);
   }
   function handleInputBlur() {
-    setIsFocused(false);
+    setIsFilled(!!value);
   }
 
   return (
@@ -29,7 +29,7 @@ export function Input({ iconName, fieldValid, ...rest }: Props) {
         <Feather
           name={iconName}
           size={24}
-          color={isFocused ? theme.colors.main : theme.colors.title}
+          color={isFocused || isFilled ? theme.colors.main : theme.colors.title}
         />
       </IconContainer>
 
