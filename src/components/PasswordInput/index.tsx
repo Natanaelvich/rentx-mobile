@@ -15,11 +15,10 @@ interface InputProps extends TextInputProps {
 
 export function PasswordInput({ iconName, ...rest }: InputProps) {
   const theme = useTheme();
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   function handleChangePasswordVisibility() {
-    const oldVisibility = visible;
-    setVisible(!oldVisibility);
+    setVisible(prevState => !prevState);
   }
 
   return (
