@@ -17,7 +17,7 @@ import { Container, Header, Title, SubTitle, Footer, Form } from './styles';
 export function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [formValid, setFormValid] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
 
@@ -60,7 +60,7 @@ export function SignIn() {
               keyboardType="email-address"
               autoCorrect={false}
               autoCapitalize="none"
-              fieldValid={isEmailValid}
+              value={email}
               onChangeText={validateEmail}
             />
             <PasswordInput
@@ -70,6 +70,7 @@ export function SignIn() {
               autoCapitalize="none"
               fieldValid={isPasswordValid}
               onChangeText={validatePassword}
+              value={password}
             />
           </Form>
 
@@ -77,7 +78,7 @@ export function SignIn() {
             <Button
               title="Login"
               onPress={() => {}}
-              enabled={false}
+              enabled={isFormValid}
               loading={false}
             />
             <Button
