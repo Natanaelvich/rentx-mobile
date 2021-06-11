@@ -5,13 +5,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Home } from '../screens/Home';
 import { CarDatails } from '../screens/CarDatails';
 import { Scheduling } from '../screens/Scheduling';
-import { SchedulingComplete } from '../screens/SchedulingComplete';
-import { SchedulingDatails } from '../screens/SchedulingDatails';
 import { MyCars } from '../screens/MyCars';
 import { Splash } from '../screens/Splash';
 import { SignIn } from '../screens/SignIn';
+import { SchedulingDetails } from '../screens/SchedulingDatails';
 import { FirstStep } from '../screens/SignUp/FirstStep';
 import { SecondStep } from '../screens/SignUp/SecondStep';
+import { Success } from '../screens/Success';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -31,8 +31,8 @@ export function StackRoutes() {
       />
       <Screen name="CarDatails" component={CarDatails} />
       <Screen name="Scheduling" component={Scheduling} />
-      <Screen name="SchedulingComplete" component={SchedulingComplete} />
-      <Screen name="SchedulingDatails" component={SchedulingDatails} />
+      <Screen name="Success" component={Success} />
+      <Screen name="SchedulingDatails" component={SchedulingDetails} />
       <Screen name="MyCars" component={MyCars} />
     </Navigator>
   );
