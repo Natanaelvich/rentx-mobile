@@ -35,6 +35,12 @@ export function SignIn() {
           autoCorrect={false}
           autoCapitalize="none"
         />
+        <Input
+          autoCapitalize="none"
+          iconName="lock"
+          autoCorrect={false}
+          placeholder="Senha"
+        />
       </Form>
 
       <Footer>
