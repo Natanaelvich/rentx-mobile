@@ -10,6 +10,8 @@ import { SchedulingDatails } from '../screens/SchedulingDatails';
 import { MyCars } from '../screens/MyCars';
 import { Splash } from '../screens/Splash';
 import { SignIn } from '../screens/SignIn';
+import { FirstStep } from '../screens/SignUp/FirstStep';
+import { SecondStep } from '../screens/SignUp/SecondStep';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -18,6 +20,8 @@ export function StackRoutes() {
     <Navigator headerMode="none" initialRouteName="Splash">
       <Screen name="SignIn" component={SignIn} />
       <Screen name="Splash" component={Splash} />
+      <Screen name="FirstStep" component={FirstStep} />
+      <Screen name="SecondStep" component={SecondStep} />
       <Screen
         name="Home"
         component={Home}
