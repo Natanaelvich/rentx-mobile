@@ -27,3 +27,11 @@ export const InputText = styled(TextInput)`
 
   padding: 0 23px;
 `;
+
+export const Visibility = styled.View`
+  height: 56px;
+  width: 55px;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.background_secondary};
+`;
