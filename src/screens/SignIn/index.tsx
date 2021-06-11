@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -15,6 +15,29 @@ import theme from '../../styles/theme';
 import { Container, Header, Title, SubTitle, Footer, Form } from './styles';
 
 export function SignIn() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [formValid, setFormValid] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+
+  function validateEmail(emailValidate: string) {
+    const res =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    setIsEmailValid(res.test(String(emailValidate).toLowerCase()));
+    if (isEmailValid) {
+      setEmail(emailValidate);
+    }
+  }
+  function validatePassword(passwordValidade: string) {
+    // size >=6
+    if (passwordValidade.length > 5) {
+      setIsPasswordValid(true);
+    }
+    if (isPasswordValid) {
+      setPassword(passwordValidade);
+    }
+  }
   return (
     <KeyboardAvoidingView behavior="position" enabled>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -37,6 +60,8 @@ export function SignIn() {
               keyboardType="email-address"
               autoCorrect={false}
               autoCapitalize="none"
+              fieldValid={isEmailValid}
+              onChangeText={validateEmail}
             />
             <PasswordInput
               iconName="lock"
