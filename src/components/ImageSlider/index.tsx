@@ -1,12 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { FlatList, ViewToken } from 'react-native';
-import {
-  Container,
-  ImageIndexes,
-  ImageIndex,
-  CardImageWrapper,
-  CarImage,
-} from './styles';
+import { Bullet } from '../Bullet';
+import { Container, ImageIndexes, CardImageWrapper, CarImage } from './styles';
 
 interface Props {
   imagesUrl: string[];
@@ -17,32 +12,32 @@ interface ChangeImageProps {
   changed: ViewToken[];
 }
 export function ImageSlider({ imagesUrl }: Props) {
-  const [indexImage, setIndexImage] = useState(0);
-  const indexChange = useRef((info: ChangeImageProps) => {
+  const indexChanged = useRef((info: ChangeImageProps) => {
     const index = info.viewableItems[0].index!;
-    setIndexImage(index);
+    setimageIndex(index);
   });
+
+  const [imageIndex, setimageIndex] = useState(0);
 
   return (
     <Container>
       <ImageIndexes>
-        {imagesUrl.map((_, index) => (
-          <ImageIndex key={String(index)} active={index === indexImage} />
+        {imagesUrl.map((item, index) => (
+          <Bullet key={String(item)} active={imageIndex === index} />
         ))}
       </ImageIndexes>
-
       <FlatList
         data={imagesUrl}
-        keyExtractor={key => key}
+        horizontal
+        onViewableItemsChanged={indexChanged.current}
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={item => String(item)}
         renderItem={({ item }) => (
           <CardImageWrapper>
             <CarImage source={{ uri: item }} resizeMode="contain" />
           </CardImageWrapper>
         )}
-        horizontal
         pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        onViewableItemsChanged={indexChange.current}
       />
     </Container>
   );
