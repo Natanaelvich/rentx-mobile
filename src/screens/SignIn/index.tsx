@@ -1,10 +1,13 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import {
+  Alert,
   Keyboard,
   KeyboardAvoidingView,
   StatusBar,
   TouchableWithoutFeedback,
 } from 'react-native';
+import * as Yup from 'yup';
 
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
@@ -15,29 +18,39 @@ import theme from '../../styles/theme';
 import { Container, Header, Title, SubTitle, Footer, Form } from './styles';
 
 export function SignIn() {
+  const navigation = useNavigation();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
 
-  function validateEmail(emailValidate: string) {
-    const res =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    setIsEmailValid(res.test(String(emailValidate).toLowerCase()));
-    if (isEmailValid) {
-      setEmail(emailValidate);
+  function handleSignUp() {
+    navigation.navigate('FirstStep');
+  }
+
+  async function handleSignIn() {
+    try {
+      const schema = Yup.object().shape({
+        email: Yup.string()
+          .required('O email é obrigatório')
+          .email('Digite um email válido'),
+        password: Yup.string()
+          .required('A senha é obrigatória')
+          .min(6, 'Necessário uma senha forte'),
+      });
+
+      await schema.validate({ email, password });
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        Alert.alert('Opa', error.message);
+      } else {
+        Alert.alert('Erro na autenticação', 'Algo errado não está certo');
+      }
     }
   }
-  function validatePassword(passwordValidade: string) {
-    // size >=6
-    if (passwordValidade.length > 5) {
-      setIsPasswordValid(true);
-    }
-    if (isPasswordValid) {
-      setPassword(passwordValidade);
-    }
-  }
+
   return (
     <KeyboardAvoidingView behavior="position" enabled>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -61,14 +74,14 @@ export function SignIn() {
               autoCorrect={false}
               autoCapitalize="none"
               value={email}
-              onChangeText={validateEmail}
+              onChangeText={setEmail}
             />
             <PasswordInput
               iconName="lock"
               placeholder="Senha"
               autoCorrect={false}
               autoCapitalize="none"
-              onChangeText={validatePassword}
+              onChangeText={setPassword}
               value={password}
             />
           </Form>
@@ -76,13 +89,13 @@ export function SignIn() {
           <Footer>
             <Button
               title="Login"
-              onPress={() => {}}
+              onPress={handleSignIn}
               enabled={isFormValid}
               loading={false}
             />
             <Button
               title="Criar conta gratuita"
-              onPress={() => {}}
+              onPress={handleSignUp}
               enabled
               light
               color={theme.colors.background_secondary}
