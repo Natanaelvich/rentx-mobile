@@ -68,7 +68,6 @@ export function SignIn() {
               placeholder="Senha"
               autoCorrect={false}
               autoCapitalize="none"
-              fieldValid={isPasswordValid}
               onChangeText={validatePassword}
               value={password}
             />
