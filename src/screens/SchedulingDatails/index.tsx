@@ -37,10 +37,9 @@ import { ImageSlider } from '../../components/ImageSlider';
 import { Button } from '../../components/Button';
 import { Accessory } from '../../components/Accessory';
 import { CarDTO } from '../../dtos/CarDTO';
-import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
 import { getPlatformDate } from '../../utils/getPlatformDate';
-import { api } from '../../services/api';
-import { SuccessProps } from '../Success';
+import { getAcessoryIcons } from '../../utils/getAcessoryIcons';
+import api from '../../services/api';
 
 interface Params {
   car: CarDTO;
@@ -109,7 +108,7 @@ export function SchedulingDetails() {
   return (
     <Container>
       <Header>
-        <BackButton onPress={() => {}} />
+        <BackButton onPress={navigation.goBack} />
       </Header>
       <CarImages>
         <ImageSlider imagesUrl={car.photos} />
@@ -130,7 +129,7 @@ export function SchedulingDetails() {
             <Accessory
               key={accessory.type}
               name={accessory.name}
-              icon={getAccessoryIcon(accessory.type)}
+              icon={getAcessoryIcons(accessory.type)}
             />
           ))}
         </Accessories>
