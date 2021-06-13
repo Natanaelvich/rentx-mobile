@@ -43,10 +43,11 @@ export function PasswordInput({ iconName, value, ...rest }: InputProps) {
         />
       </IconContainer>
       <InputText
-        {...rest}
         secureTextEntry={visible}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
+        autoCorrect={false}
+        {...rest}
       />
       <ChangePasswordVisibility onPress={handleChangePasswordVisibility}>
         <IconContainer>
