@@ -12,6 +12,7 @@ import * as Yup from 'yup';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { PasswordInput } from '../../components/PasswordInput';
+import { useAuth } from '../../contexts/AuthProvider';
 
 import theme from '../../styles/theme';
 
@@ -20,11 +21,10 @@ import { Container, Header, Title, SubTitle, Footer, Form } from './styles';
 export function SignIn() {
   const navigation = useNavigation();
 
+  const { signIn } = useAuth();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isFormValid, setIsFormValid] = useState(false);
-  const [isEmailValid, setIsEmailValid] = useState(false);
-  const [isPasswordValid, setIsPasswordValid] = useState(false);
 
   function handleSignUp() {
     navigation.navigate('FirstStep');
@@ -42,6 +42,8 @@ export function SignIn() {
       });
 
       await schema.validate({ email, password });
+
+      signIn({ email, password });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert('Opa', error.message);
@@ -90,7 +92,7 @@ export function SignIn() {
             <Button
               title="Login"
               onPress={handleSignIn}
-              enabled={isFormValid}
+              enabled
               loading={false}
             />
             <Button
