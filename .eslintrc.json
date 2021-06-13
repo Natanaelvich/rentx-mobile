@@ -44,6 +44,7 @@
     "consistent-return" : "off",
     "@typescript-eslint/no-use-before-define": "off",
     "react/no-array-index-key": "off",
+    "no-underscore-dangle": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
