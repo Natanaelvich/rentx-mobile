@@ -17,6 +17,7 @@ import {
   Title,
 } from './styles';
 import { Bullet } from '../../../components/Bullet';
+import api from '../../../services/api';
 
 interface Params {
   user: {
@@ -46,6 +47,14 @@ export function SecondStep() {
           .min(6, 'Insira uma senha forte com no mínimo 6 caracteres'),
       });
       const result = await schema.validate({ password, passwordConfirmation });
+
+      await api.post('/users', {
+        name: user.name,
+        email: user.email,
+        driver_license: user.cnh,
+        password,
+      });
+
       const pageData = {
         title: 'Conta criada',
         message: 'Agora é só realizar o login',
