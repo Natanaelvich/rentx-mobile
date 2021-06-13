@@ -27,7 +27,7 @@ export function SignIn() {
   const [password, setPassword] = useState('');
 
   function handleSignUp() {
-    navigation.navigate('FirstStep');
+    navigation.navigate('SignUpFirstStep');
   }
 
   async function handleSignIn() {

@@ -16,6 +16,15 @@ export default {
 
     shape: '#E1E1E8',
     shape_dark: '#29292E',
+
+    bgPrimary: '#F4F5F6',
+    bgSecondary: '#FFFFFF',
+
+    textDetails: '#AEAEB3',
+
+    mainClear: '#FDEDEF',
+
+    shapeSec: '#29292E',
   },
   fonts: {
     primary_400: 'Inter_400Regular',

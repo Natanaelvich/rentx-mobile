@@ -5,8 +5,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useTheme } from 'styled-components/native';
 
 import * as Icon from '../assets/tabIcons';
-import * as P from '../pages';
 import { AppStackRoutes } from './app.stack.routes';
+import { Profile } from '../screens/Profile/index.tsx';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -30,25 +30,25 @@ export const AppTabRoutes = () => {
         component={AppStackRoutes}
         options={{
           tabBarIcon: ({ color }) => (
-            <Icon.Home width={24} height={24} fill={color} />
+            <Icon.HomeIcon width={24} height={24} fill={color} />
           ),
         }}
       />
       <Screen
         name="SchedulesList"
-        component={P.SchedulesList}
+        component={SchedulesList}
         options={{
           tabBarIcon: ({ color }) => (
-            <Icon.Car width={24} height={24} fill={color} />
+            <Icon.CarIcon width={24} height={24} fill={color} />
           ),
         }}
       />
       <Screen
         name="Profile"
-        component={P.Profile}
+        component={Profile}
         options={{
           tabBarIcon: ({ color }) => (
-            <Icon.Profile width={24} height={24} fill={color} />
+            <Icon.ProfileIcon width={24} height={24} fill={color} />
           ),
         }}
       />

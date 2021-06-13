@@ -7,9 +7,9 @@ import {
   SignInCredentials,
   User,
 } from './types';
-import { api } from '../../services';
 import { database } from '../../databases';
 import { User as ModelUser } from '../../databases/model/User';
+import api from '../../services/api';
 
 export const AuthContext = createContext({} as AuthContextData);
 
