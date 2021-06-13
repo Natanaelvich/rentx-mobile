@@ -14,6 +14,7 @@ import {
 } from '@expo-google-fonts/archivo';
 import { Routes } from './routes';
 import theme from './styles/theme';
+import { AppProvider } from './contexts/AppProvider';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -27,8 +28,10 @@ export default function App() {
     return <AppLoading />;
   }
   return (
-    <ThemeProvider theme={theme}>
-      <Routes />
-    </ThemeProvider>
+    <AppProvider>
+      <ThemeProvider theme={theme}>
+        <Routes />
+      </ThemeProvider>
+    </AppProvider>
   );
 }
