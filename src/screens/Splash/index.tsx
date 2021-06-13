@@ -14,10 +14,13 @@ import BrandSvg from '../../assets/brand.svg';
 import LogoSvg from '../../assets/logo.svg';
 
 import { Container } from './styles';
+import { useAuth } from '../../contexts/AuthProvider';
 
 export function Splash() {
   const splashAnimation = useSharedValue(0);
-  const navigation = useNavigation();
+  const { navigate } = useNavigation();
+
+  const { user } = useAuth();
 
   const brandStyle = useAnimatedStyle(() => {
     return {
@@ -51,9 +54,7 @@ export function Splash() {
     };
   });
 
-  function startApp() {
-    navigation.navigate('SignIn');
-  }
+  const startApp = () => navigate(!user?.id ? 'SignIn' : 'Home');
 
   useEffect(() => {
     splashAnimation.value = withTiming(50, { duration: 1000 }, () => {
