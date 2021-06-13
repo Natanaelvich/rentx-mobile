@@ -12,10 +12,12 @@ export type AuthContextData = {
 
 export type User = {
   id: string;
+  user_id: string;
   name: string;
   email: string;
   driver_license: string;
   avatar: string;
+  token: string;
 };
 
 export type SignInCredentials = {
@@ -24,6 +26,6 @@ export type SignInCredentials = {
 };
 
 export type AuthState = {
-  token: string;
   user: User;
+  token: string;
 };
