@@ -23,8 +23,8 @@ export function ImageSlider({ imagesUrl }: Props) {
   return (
     <Container>
       <ImageIndexes>
-        {imagesUrl.map((item, index) => (
-          <Bullet key={String(item)} active={imageIndex === index} />
+        {imagesUrl.map((_, index) => (
+          <Bullet key={String(index)} active={imageIndex === index} />
         ))}
       </ImageIndexes>
       <FlatList
