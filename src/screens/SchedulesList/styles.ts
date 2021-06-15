@@ -7,7 +7,7 @@ import {
 } from 'react-native-iphone-x-helper';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { AntDesign } from '@expo/vector-icons';
-import { CarDTO } from '../../dtos/CarDTO';
+import { CarByUser } from '../../dtos/CarDTO';
 
 export const Container = styled.View`
   ${({ theme: { colors } }) => css`
@@ -72,12 +72,14 @@ export const AppointmentQuantity = styled.Text`
     color: ${colors.text};
   `}
 `;
-export const CarsList = styled(FlatList as new () => FlatList<CarDTO>).attrs({
-  showsVerticalScrollIndicator: false,
-  contentContainerStyle: {
-    paddingBottom: getBottomSpace() + 4,
+export const CarsList = styled(FlatList as new () => FlatList<CarByUser>).attrs(
+  {
+    showsVerticalScrollIndicator: false,
+    contentContainerStyle: {
+      paddingBottom: getBottomSpace() + 4,
+    },
   },
-})``;
+)``;
 
 export const CarWrapper = styled.View`
   width: 100%;

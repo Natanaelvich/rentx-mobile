@@ -21,6 +21,7 @@ interface Props extends RectButtonProps {
 }
 export function Car({ data, ...rest }: Props) {
   const MotorIcon = getAcessoryIcons(data.fuel_type);
+
   return (
     <Container {...rest}>
       <Details>
@@ -28,8 +29,8 @@ export function Car({ data, ...rest }: Props) {
         <Name>{data.name}</Name>
         <About>
           <Rent>
-            <Period>{data.rent.period}</Period>
-            <Price> {`R$ ${data.rent.price}`}</Price>
+            <Period>{data.period}</Period>
+            <Price> {`R$ ${data.price}`}</Price>
           </Rent>
           <Type>
             <MotorIcon />

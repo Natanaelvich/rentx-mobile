@@ -8,13 +8,13 @@ import * as S from './styles';
 import { LoadAnimate } from '../../components/LoadAnimate';
 import { IconButton } from '../../components/IconButton';
 import { Car } from '../../components/Car';
-import { CarDTO } from '../../dtos/CarDTO';
+import { CarByUser } from '../../dtos/CarDTO';
 import api from '../../services/api';
 
 export const SchedulesList = () => {
   const { colors } = useTheme();
   const { navigate } = useNavigation();
-  const [cars, setCars] = useState<CarDTO[]>([]);
+  const [cars, setCars] = useState<CarByUser[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const loadAppointments = async () => {
