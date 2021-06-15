@@ -46,7 +46,7 @@ export function FirstStep() {
       });
       await schema.validate({ name, email, cnh });
       const data = { name, email, cnh };
-      navigation.navigate('SecondStep', { user: data });
+      navigation.navigate('SignUpSecondStep', { user: data });
     } catch (e) {
       if (e instanceof Yup.ValidationError) {
         Alert.alert('Opa', e.message);
