@@ -7,6 +7,7 @@ import { useTheme } from 'styled-components/native';
 import * as Icon from '../assets/tabIcons';
 import { AppStackRoutes } from './app.stack.routes';
 import { Profile } from '../screens/Profile/index.tsx';
+import { SchedulesList } from '../screens/SchedulesList';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
