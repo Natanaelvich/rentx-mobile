@@ -13,8 +13,14 @@ export interface CarDTO {
     type: string;
     name: string;
   }[];
-  photos: string[];
+  photos: Photo[];
 }
+
+export type Photo = {
+  id: string;
+  car_id: string;
+  photo: string;
+};
 
 export type CarByUser = {
   car: CarDTO;
