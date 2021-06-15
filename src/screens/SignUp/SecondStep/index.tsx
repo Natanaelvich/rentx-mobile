@@ -58,9 +58,9 @@ export function SecondStep() {
       const pageData = {
         title: 'Conta criada',
         message: 'Agora é só realizar o login',
-        navigateTo: 'SignIn',
+        nextScreen: 'SignIn',
       };
-      navigation.navigate('Success', { data: pageData });
+      navigation.navigate('Confirmation', pageData);
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert('Opa', error.message);
