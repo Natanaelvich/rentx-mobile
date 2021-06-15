@@ -58,44 +58,48 @@ export function SchedulingDetails() {
   );
   const { car, dates } = routes.params as Params;
   const [loading, setloading] = useState(false);
+
   async function handleConfirmRental() {
-    setloading(true);
-    // post to API
-    const schedulesByCar = await api.get(`/schedules_bycars/${car.id}`);
-    const unavailable_dates = [
-      ...schedulesByCar.data.unavailable_dates,
-      ...dates,
-    ];
-    // posting rent to  user
-    await api.post('/schedules_byuser', {
-      user_id: 1,
-      car,
-      startDate: format(getPlatformDate(new Date(dates[0])), 'dd/MM/yyyy'),
-      endDate: format(
-        getPlatformDate(new Date(dates[dates.length - 1])),
-        'dd/MM/yyyy',
-      ),
-    });
-    api
-      .put(`/schedules_bycars/${car.id}`, {
+    try {
+      setloading(true);
+      // post to API
+      const schedulesByCar = await api.get(`/schedules_bycars/${car.id}`);
+      const unavailable_dates = [
+        ...schedulesByCar.data.unavailable_dates,
+        ...dates,
+      ];
+      // posting rent to  user
+      await api.post('/schedules_byuser', {
+        user_id: 1,
+        car,
+        startDate: format(getPlatformDate(new Date(dates[0])), 'dd/MM/yyyy'),
+        endDate: format(
+          getPlatformDate(new Date(dates[dates.length - 1])),
+          'dd/MM/yyyy',
+        ),
+      });
+
+      await api.put(`/schedules_bycars/${car.id}`, {
         id: car.id,
         unavailable_dates,
-      })
-      .then(() => {
-        const pageData = {
-          title: 'Carro alugado!',
-          message: `Agora você só precisa ir\naté a concessionária da RENTX\npegar seu automóvel`,
-          navigateTo: 'Home',
-        };
-        navigation.navigate('Success', { data: pageData });
-      })
-      .catch(() => {
-        setloading(false);
-        Alert.alert('Não foi possivel agendar');
       });
+
+      const pageData = {
+        title: 'Carro alugado!',
+        message: `Agora você só precisa ir\naté a concessionária da RENTX\npegar seu automóvel`,
+        navigateTo: 'Home',
+      };
+      navigation.navigate('Success', { data: pageData });
+    } catch (error) {
+      Alert.alert('Não foi possivel agendar');
+      console.log(error);
+    } finally {
+      setloading(false);
+    }
   }
 
   const theme = useTheme();
+
   useEffect(() => {
     setRentalPeriod({
       start: format(getPlatformDate(new Date(dates[0])), 'dd/MM/yyyy'),
@@ -104,7 +108,8 @@ export function SchedulingDetails() {
         'dd/MM/yyyy',
       ),
     });
-  }, []);
+  }, [dates]);
+
   return (
     <Container>
       <Header>
