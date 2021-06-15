@@ -53,7 +53,9 @@ export const Profile = () => {
               <IconButton onPress={handleSignOut} name="power" />
             </S.TopHeader>
             <S.AvatarContainer>
-              <S.Avatar source={{ uri: 'https://github.com/tmowes.png' }} />
+              <S.Avatar
+                source={{ uri: 'https://github.com/Natanaelvich.png' }}
+              />
               <S.AvatarButton>
                 <S.AvatarIcon name="camera" />
               </S.AvatarButton>
