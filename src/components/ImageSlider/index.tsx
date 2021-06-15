@@ -1,10 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { FlatList, ViewToken } from 'react-native';
 import { Bullet } from '../Bullet';
+import { Photo } from '../../dtos/CarDTO';
 import { Container, ImageIndexes, CardImageWrapper, CarImage } from './styles';
 
 interface Props {
-  imagesUrl: string[];
+  imagesUrl: Photo[];
 }
 
 interface ChangeImageProps {
@@ -31,10 +32,10 @@ export function ImageSlider({ imagesUrl }: Props) {
         horizontal
         onViewableItemsChanged={indexChanged.current}
         showsHorizontalScrollIndicator={false}
-        keyExtractor={item => String(item)}
+        keyExtractor={item => String(item.id)}
         renderItem={({ item }) => (
           <CardImageWrapper>
-            <CarImage source={{ uri: item }} resizeMode="contain" />
+            <CarImage source={{ uri: item.photo }} resizeMode="contain" />
           </CardImageWrapper>
         )}
         pagingEnabled
