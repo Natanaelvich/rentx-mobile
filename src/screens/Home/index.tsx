@@ -3,6 +3,7 @@ import { StatusBar } from 'react-native';
 
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useNavigation } from '@react-navigation/native';
+import { synchronize } from '@nozbe/watermelondb/sync';
 import {
   useAnimatedGestureHandler,
   useAnimatedStyle,
@@ -14,15 +15,16 @@ import { PanGestureHandler } from 'react-native-gesture-handler';
 import Logo from '../../assets/logo.svg';
 import * as S from './styles';
 import { ContextProps } from './types';
-import { CarDTO } from '../../dtos/CarDTO';
 import api from '../../services/api';
 import { Car } from '../../components/Car';
 import { LoadAnimate } from '../../components/LoadAnimate';
+import { ModelCar, database } from '../../databases';
+import { LabelButton } from '../../components/LabelButton';
 
 export const Home = () => {
   const { navigate } = useNavigation();
   const [isLoading, setIsLoading] = useState(true);
-  const [cars, setCars] = useState<CarDTO[]>([]);
+  const [cars, setCars] = useState<ModelCar[]>([]);
   const positionX = useSharedValue(0);
   const positionY = useSharedValue(0);
 
@@ -48,24 +50,49 @@ export const Home = () => {
     },
   });
 
-  const loadCars = async (isMonted: boolean) => {
-    try {
-      const { data } = await api.get('cars');
-      if (isMonted) {
-        setCars(data);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      if (isMonted) {
-        setIsLoading(false);
-      }
-    }
+  const offlineSynchronize = async () => {
+    console.log('offlineSynchronize');
+
+    await synchronize({
+      database,
+      pullChanges: async ({ lastPulledAt }) => {
+        const response = await api.get(
+          `cars/sync/pull?lastPulledVersion=${lastPulledAt || 0}`,
+        );
+        const { changes, latestVersion } = response.data;
+
+        console.log('LOAD DATA FROM BACKEND TO APP');
+        console.log(JSON.stringify(changes));
+
+        return { changes, timestamp: latestVersion };
+      },
+      pushChanges: async ({ changes }) => {
+        console.log('SEND DATA FROM APP TO BACKEND');
+        console.log(JSON.stringify(changes));
+      },
+    });
   };
 
   useEffect(() => {
     let isMonted = true;
-    loadCars(isMonted);
+    const loadCarsData = async () => {
+      try {
+        // const carCollection = database.get<ModelCar>('cars')
+        // const loadedCars = await carCollection.query().fetch()
+        const { data } = await api.get('cars');
+        // if (isMonted && data.length > 0) {
+        if (isMonted) {
+          setCars(data);
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        if (isMonted) {
+          setIsLoading(false);
+        }
+      }
+    };
+    loadCarsData();
     return () => {
       isMonted = false;
     };
@@ -86,6 +113,7 @@ export const Home = () => {
         />
         {!isLoading && <S.TotalCars>Total de {cars.length} carros</S.TotalCars>}
       </S.Header>
+      <LabelButton label="Sincronizar" onPress={offlineSynchronize} />
       {isLoading ? (
         <LoadAnimate />
       ) : (

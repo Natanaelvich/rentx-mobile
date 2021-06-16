@@ -6,7 +6,7 @@ import { getBottomSpace } from 'react-native-iphone-x-helper';
 import { RFValue } from 'react-native-responsive-fontsize';
 import styled, { css } from 'styled-components/native';
 import Animated from 'react-native-reanimated';
-import { CarDTO } from '../../dtos/CarDTO';
+import { ModelCar } from '../../databases';
 
 const AnimatedButton = Animated.createAnimatedComponent(RectButton);
 
@@ -42,7 +42,7 @@ export const Title = styled.Text`
   `}
 `;
 
-export const CarsList = styled(FlatList as new () => FlatList<CarDTO>).attrs({
+export const CarsList = styled(FlatList as new () => FlatList<ModelCar>).attrs({
   showsVerticalScrollIndicator: false,
   contentContainerStyle: {
     paddingTop: 16,
