@@ -3,7 +3,7 @@ import {
   getStatusBarHeight,
 } from 'react-native-iphone-x-helper';
 import { RFValue } from 'react-native-responsive-fontsize';
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
@@ -76,20 +76,30 @@ export const About = styled.Text`
   line-height: ${RFValue(25)}px;
 `;
 
-export const Accessories = styled.View`
-  width: 100%;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-
-  margin-top: 16px;
-`;
-
 export const Footer = styled.View`
   width: 100%;
   background-color: ${({ theme }) => theme.colors.background_secondary};
 
   padding: 24px;
   padding-bottom: ${getBottomSpace() + 24}px;
+`;
+
+export const AddonsContainer = styled.View`
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+`;
+
+export const OffLineMsg = styled.Text`
+  ${({ theme: { colors, fonts } }) => css`
+    font-family: ${fonts.primary_400};
+    font-size: ${RFValue(13)}px;
+    /* line-height: ${RFValue(24)}px; */
+    color: ${colors.main};
+    text-align: center;
+    /* margin-top: 24px; */
+  `}
 `;

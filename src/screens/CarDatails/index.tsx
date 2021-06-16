@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import Animated, {
@@ -13,13 +13,14 @@ import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import { useTheme } from 'styled-components';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
+import { useNetInfo } from '@react-native-community/netinfo';
 import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
 import { Accessory } from '../../components/Accessory';
 import { Button } from '../../components/Button';
 
 import { getAcessoryIcons } from '../../utils/getAcessoryIcons';
-import { CarDTO } from '../../dtos/CarDTO';
+import { CarDTO, Photo } from '../../dtos/CarDTO';
 
 import {
   Container,
@@ -33,9 +34,13 @@ import {
   Period,
   Price,
   About,
-  Accessories,
+  AddonsContainer,
   Footer,
+  OffLineMsg,
 } from './styles';
+import api from '../../services/api';
+import { Car } from '../../databases/model/Car';
+import { AddonsCard } from '../../components/AddonsCard';
 
 interface Params {
   car: CarDTO;
@@ -43,6 +48,8 @@ interface Params {
 export function CarDatails() {
   const navigation = useNavigation();
   const route = useRoute();
+  const { isConnected } = useNetInfo();
+
   const { car } = route.params as Params;
   const scrollY = useSharedValue(0);
   const sizes = {
@@ -50,6 +57,9 @@ export function CarDatails() {
     finally: RFValue(200),
   };
   const theme = useTheme();
+
+  const [onlineCar, setOnlineCar] = useState({} as CarDTO);
+
   const scrollHandle = useAnimatedScrollHandler(event => {
     scrollY.value = event.contentOffset.y;
   });
@@ -74,6 +84,20 @@ export function CarDatails() {
   function handleBack() {
     navigation.goBack();
   }
+
+  const checkedPhotos = onlineCar.photos
+    ? onlineCar.photos
+    : ([{ id: car.thumbnail, photo: car.thumbnail }] as Photo[]);
+
+  useEffect(() => {
+    const loadOnlineCar = async () => {
+      const { data } = await api.get<CarDTO>(`cars/${car.id}`);
+      setOnlineCar(data);
+    };
+    if (isConnected === true) {
+      loadOnlineCar();
+    }
+  }, [car, isConnected]);
   return (
     <Container>
       <StatusBar
@@ -93,7 +117,7 @@ export function CarDatails() {
         </Header>
         <Animated.View style={[slidercarStyleAnimation]}>
           <CarImages>
-            <ImageSlider imagesUrl={car.photos} />
+            <ImageSlider imagesUrl={checkedPhotos} />
           </CarImages>
         </Animated.View>
       </Animated.View>
@@ -113,18 +137,20 @@ export function CarDatails() {
           </Description>
           <Rent>
             <Period>{car.period}</Period>
-            <Price>R$ {car.price}</Price>
+            <Price>{`R$ ${isConnected === true ? car.price : '...'}`}</Price>
           </Rent>
         </Details>
-        <Accessories>
-          {car.accessories.map(acessory => (
-            <Accessory
-              key={acessory.name}
-              name={acessory.name}
-              icon={getAcessoryIcons(acessory.type)}
-            />
-          ))}
-        </Accessories>
+        {onlineCar.accessories && (
+          <AddonsContainer>
+            {onlineCar.accessories.map(({ name, type }) => (
+              <AddonsCard
+                key={type}
+                name={name}
+                icon={getAcessoryIcons(type)}
+              />
+            ))}
+          </AddonsContainer>
+        )}
         <About>
           {car.about}
           {car.about}
@@ -141,6 +167,13 @@ export function CarDatails() {
           title="Escolher período do alugel"
           onPress={handleSelectPeriod}
         />
+
+        {isConnected === false && (
+          <OffLineMsg>
+            💬 você precisar estar conectado{`\n`}
+            para ver mais detalhes e agendar seu carro.
+          </OffLineMsg>
+        )}
       </Footer>
     </Container>
   );
