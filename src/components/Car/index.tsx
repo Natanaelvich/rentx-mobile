@@ -1,7 +1,9 @@
+import { useNetInfo } from '@react-native-community/netinfo';
 import React from 'react';
+import FastImage from 'react-native-fast-image';
 import { RectButtonProps } from 'react-native-gesture-handler';
+import { ModelCar } from '../../databases';
 
-import { CarDTO } from '../../dtos/CarDTO';
 import { getAcessoryIcons } from '../../utils/getAcessoryIcons';
 import {
   Container,
@@ -17,9 +19,11 @@ import {
 } from './styles';
 
 interface Props extends RectButtonProps {
-  data: CarDTO;
+  data: ModelCar;
 }
 export function Car({ data, ...rest }: Props) {
+  const { isConnected } = useNetInfo();
+
   const MotorIcon = getAcessoryIcons(data.fuel_type);
 
   return (
@@ -30,14 +34,17 @@ export function Car({ data, ...rest }: Props) {
         <About>
           <Rent>
             <Period>{data.period}</Period>
-            <Price> {`R$ ${data.price}`}</Price>
+            <Price>{`R$ ${isConnected === true ? data.price : '...'}`}</Price>
           </Rent>
           <Type>
             <MotorIcon />
           </Type>
         </About>
       </Details>
-      <CardImage source={{ uri: data.thumbnail }} resizeMode="contain" />
+      <CardImage
+        source={{ uri: data.thumbnail }}
+        resizeMode={FastImage.resizeMode.contain}
+      />
     </Container>
   );
 }
