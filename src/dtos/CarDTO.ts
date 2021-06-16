@@ -1,3 +1,5 @@
+import { ModelCar } from '../databases';
+
 export interface CarDTO {
   id: string;
   brand: string;
@@ -23,9 +25,9 @@ export type Photo = {
 };
 
 export type CarByUser = {
-  car: CarDTO;
+  car: ModelCar;
   id: string;
   user_id: string;
-  startDate: string;
-  endDate: string;
+  start_date: string;
+  end_date: string;
 };
