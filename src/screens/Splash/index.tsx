@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 
 import Animated, {
@@ -9,7 +9,7 @@ import Animated, {
   Extrapolate,
   runOnJS,
 } from 'react-native-reanimated';
-import { useNavigation } from '@react-navigation/core';
+import { StackActions, useNavigation } from '@react-navigation/core';
 import BrandSvg from '../../assets/brand.svg';
 import LogoSvg from '../../assets/logo.svg';
 
@@ -18,7 +18,7 @@ import { useAuth } from '../../contexts/AuthProvider';
 
 export function Splash() {
   const splashAnimation = useSharedValue(0);
-  const { navigate } = useNavigation();
+  const navigation = useNavigation();
 
   const { user } = useAuth();
 
@@ -54,7 +54,9 @@ export function Splash() {
     };
   });
 
-  const startApp = () => navigate(!user?.id ? 'SignIn' : 'Home');
+  const startApp = useCallback(() => {
+    navigation.dispatch(StackActions.replace(!user?.id ? 'SignIn' : 'Home'));
+  }, [navigation, user]);
 
   useEffect(() => {
     splashAnimation.value = withTiming(50, { duration: 1000 }, () => {
@@ -62,7 +64,7 @@ export function Splash() {
 
       runOnJS(startApp)();
     });
-  }, []);
+  }, [splashAnimation.value, startApp]);
   return (
     <Container>
       <Animated.View style={[brandStyle, { position: 'absolute' }]}>
