@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { FlatList, ViewToken } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import { Bullet } from '../Bullet';
 import { Photo } from '../../dtos/CarDTO';
 import { Container, ImageIndexes, CardImageWrapper, CarImage } from './styles';
@@ -35,7 +36,10 @@ export function ImageSlider({ imagesUrl }: Props) {
         keyExtractor={item => String(item.id)}
         renderItem={({ item }) => (
           <CardImageWrapper>
-            <CarImage source={{ uri: item.photo }} resizeMode="contain" />
+            <CarImage
+              source={{ uri: item.photo }}
+              resizeMode={FastImage.resizeMode.contain}
+            />
           </CardImageWrapper>
         )}
         pagingEnabled
