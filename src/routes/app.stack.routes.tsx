@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Home } from '../screens/Home';
 import { Scheduling } from '../screens/Scheduling';
 import { Splash } from '../screens/Splash';
-import { SchedulingDetails } from '../screens/SchedulingDatails';
+import { SchedulingDetails } from '../screens/SchedulingDetails';
 import { CarDatails } from '../screens/CarDatails';
 import { Confirmation } from '../screens/Confirmation';
 import { SchedulesList } from '../screens/SchedulesList';
